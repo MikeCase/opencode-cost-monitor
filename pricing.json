@@ -1,154 +1,275 @@
 {
-  "source": "https://opencode.ai/docs/zen",
-  "scraped": "2026-06-26",
-  "plan": "zen",
-  "description": "OpenCode Zen pay-per-token pricing. All prices per 1M tokens.",
-  "models": {
-    "deepseek-v4-flash": {
-      "input": 0.14,
-      "output": 0.28,
-      "cache_read": 0.028,
-      "cache_write": null
+  "plans": {
+    "go": {
+      "name": "Go",
+      "description": "$10/month subscription with included usage. Cached read on DeepSeek models is 10x cheaper than Zen.",
+      "url": "https://opencode.ai/go",
+      "models": {
+        "deepseek-v4-flash": {
+          "input": 0.14,
+          "output": 0.28,
+          "cache_read": 0.0028,
+          "cache_write": null,
+          "note": "Go cached read is 10x cheaper than Zen"
+        },
+        "deepseek-v4-pro": {
+          "input": 1.74,
+          "output": 3.48,
+          "cache_read": 0.0145,
+          "cache_write": null,
+          "note": "Go cached read is 10x cheaper than Zen"
+        },
+        "minimax-m2.7": {
+          "input": 0.30,
+          "output": 1.20,
+          "cache_read": 0.06,
+          "cache_write": 0.375
+        },
+        "minimax-m2.5": {
+          "input": 0.30,
+          "output": 1.20,
+          "cache_read": 0.06,
+          "cache_write": 0.375
+        },
+        "minimax-m3": {
+          "input": 0.30,
+          "output": 1.20,
+          "cache_read": 0.06,
+          "cache_write": null
+        },
+        "glm-5": {
+          "input": 1.00,
+          "output": 3.20,
+          "cache_read": 0.20,
+          "cache_write": null,
+          "deprecated": "2026-05-14, use glm-5.1 or glm-5.2"
+        },
+        "glm-5.1": {
+          "input": 1.40,
+          "output": 4.40,
+          "cache_read": 0.26,
+          "cache_write": null
+        },
+        "glm-5.2": {
+          "input": 1.40,
+          "output": 4.40,
+          "cache_read": 0.26,
+          "cache_write": null
+        },
+        "kimi-k2.5": {
+          "input": 0.60,
+          "output": 3.00,
+          "cache_read": 0.10,
+          "cache_write": null
+        },
+        "kimi-k2.6": {
+          "input": 0.95,
+          "output": 4.00,
+          "cache_read": 0.16,
+          "cache_write": null
+        },
+        "kimi-k2.7-code": {
+          "input": 0.95,
+          "output": 4.00,
+          "cache_read": 0.19,
+          "cache_write": null
+        },
+        "gpt-5-nano": {
+          "input": 0.05,
+          "output": 0.40,
+          "cache_read": 0.005,
+          "cache_write": null
+        },
+        "mimo-v2.5": {
+          "input": 0.14,
+          "output": 0.28,
+          "cache_read": 0.0028,
+          "cache_write": null
+        },
+        "mimo-v2.5-pro": {
+          "input": 1.74,
+          "output": 3.48,
+          "cache_read": 0.0145,
+          "cache_write": null
+        },
+        "qwen3.7-max": {
+          "input": 2.50,
+          "output": 7.50,
+          "cache_read": 0.50,
+          "cache_write": 3.125
+        },
+        "qwen3.7-plus": {
+          "input": 0.40,
+          "output": 1.60,
+          "cache_read": 0.04,
+          "cache_write": 0.50
+        },
+        "qwen3.6-plus": {
+          "input": 0.50,
+          "output": 3.00,
+          "cache_read": 0.05,
+          "cache_write": 0.625
+        },
+        "qwen3.5-plus": {
+          "input": 0.20,
+          "output": 1.20,
+          "cache_read": 0.02,
+          "cache_write": 0.25
+        }
+      }
     },
-    "deepseek-v4-pro": {
-      "input": 1.74,
-      "output": 3.48,
-      "cache_read": 0.145,
-      "cache_write": null
-    },
-    "minimax-m2.7": {
-      "input": 0.30,
-      "output": 1.20,
-      "cache_read": 0.06,
-      "cache_write": 0.375
-    },
-    "minimax-m2.5": {
-      "input": 0.30,
-      "output": 1.20,
-      "cache_read": 0.06,
-      "cache_write": 0.375
-    },
-    "minimax-m3": {
-      "input": 0.30,
-      "output": 1.20,
-      "cache_read": 0.06,
-      "cache_write": null
-    },
-    "glm-5": {
-      "input": 1.00,
-      "output": 3.20,
-      "cache_read": 0.20,
-      "cache_write": null,
-      "deprecated": "2026-05-14, use glm-5.1 or glm-5.2"
-    },
-    "glm-5.1": {
-      "input": 1.40,
-      "output": 4.40,
-      "cache_read": 0.26,
-      "cache_write": null
-    },
-    "glm-5.2": {
-      "input": 1.40,
-      "output": 4.40,
-      "cache_read": 0.26,
-      "cache_write": null
-    },
-    "kimi-k2.5": {
-      "input": 0.60,
-      "output": 3.00,
-      "cache_read": 0.10,
-      "cache_write": null
-    },
-    "kimi-k2.6": {
-      "input": 0.95,
-      "output": 4.00,
-      "cache_read": 0.16,
-      "cache_write": null
-    },
-    "gpt-5-nano": {
-      "input": 0.05,
-      "output": 0.40,
-      "cache_read": 0.005,
-      "cache_write": null
-    },
-    "mimo-v2.5": {
-      "input": 0.00,
-      "output": 0.00,
-      "cache_read": 0.00,
-      "cache_write": null,
-      "note": "Free tier (rate-limited). Pro: $1.74/$3.48 input/output"
-    },
-    "qwen3.7-max": {
-      "input": 2.50,
-      "output": 7.50,
-      "cache_read": 0.50,
-      "cache_write": 3.125
-    },
-    "qwen3.7-plus": {
-      "input": 0.40,
-      "output": 1.60,
-      "cache_read": 0.04,
-      "cache_write": 0.50
-    },
-    "qwen3.6-plus": {
-      "input": 0.50,
-      "output": 3.00,
-      "cache_read": 0.05,
-      "cache_write": 0.625
-    },
-    "qwen3.5-plus": {
-      "input": 0.20,
-      "output": 1.20,
-      "cache_read": 0.02,
-      "cache_write": 0.25
-    },
-    "grok-build-0.1": {
-      "input": 1.00,
-      "output": 2.00,
-      "cache_read": 0.20,
-      "cache_write": null
-    },
-    "claude-fable-5": {
-      "input": 10.00,
-      "output": 50.00,
-      "cache_read": 1.00,
-      "cache_write": 12.50
-    },
-    "claude-opus-4.8": {
-      "input": 5.00,
-      "output": 25.00,
-      "cache_read": 0.50,
-      "cache_write": 6.25
-    },
-    "claude-sonnet-4.6": {
-      "input": 3.00,
-      "output": 15.00,
-      "cache_read": 0.30,
-      "cache_write": 3.75
-    },
-    "claude-haiku-4.5": {
-      "input": 1.00,
-      "output": 5.00,
-      "cache_read": 0.10,
-      "cache_write": 1.25
-    },
-    "gemini-3.5-flash": {
-      "input": 1.50,
-      "output": 9.00,
-      "cache_read": 0.15,
-      "cache_write": null
-    },
-    "gpt-5.4-mini": {
-      "input": 0.75,
-      "output": 4.50,
-      "cache_read": 0.075,
-      "cache_write": null
-    },
-    "gpt-5.4-nano": {
-      "input": 0.20,
-      "output": 1.25,
-      "cache_read": 0.02,
-      "cache_write": null
+    "zen": {
+      "name": "Zen",
+      "description": "Pay-as-you-go credits. No subscription needed.",
+      "url": "https://opencode.ai/docs/zen",
+      "models": {
+        "deepseek-v4-flash": {
+          "input": 0.14,
+          "output": 0.28,
+          "cache_read": 0.028,
+          "cache_write": null
+        },
+        "deepseek-v4-pro": {
+          "input": 1.74,
+          "output": 3.48,
+          "cache_read": 0.145,
+          "cache_write": null
+        },
+        "minimax-m2.7": {
+          "input": 0.30,
+          "output": 1.20,
+          "cache_read": 0.06,
+          "cache_write": 0.375
+        },
+        "minimax-m2.5": {
+          "input": 0.30,
+          "output": 1.20,
+          "cache_read": 0.06,
+          "cache_write": 0.375
+        },
+        "minimax-m3": {
+          "input": 0.30,
+          "output": 1.20,
+          "cache_read": 0.06,
+          "cache_write": null
+        },
+        "glm-5": {
+          "input": 1.00,
+          "output": 3.20,
+          "cache_read": 0.20,
+          "cache_write": null,
+          "deprecated": "2026-05-14, use glm-5.1 or glm-5.2"
+        },
+        "glm-5.1": {
+          "input": 1.40,
+          "output": 4.40,
+          "cache_read": 0.26,
+          "cache_write": null
+        },
+        "glm-5.2": {
+          "input": 1.40,
+          "output": 4.40,
+          "cache_read": 0.26,
+          "cache_write": null
+        },
+        "kimi-k2.5": {
+          "input": 0.60,
+          "output": 3.00,
+          "cache_read": 0.10,
+          "cache_write": null
+        },
+        "kimi-k2.6": {
+          "input": 0.95,
+          "output": 4.00,
+          "cache_read": 0.16,
+          "cache_write": null
+        },
+        "gpt-5-nano": {
+          "input": 0.05,
+          "output": 0.40,
+          "cache_read": 0.005,
+          "cache_write": null
+        },
+        "mimo-v2.5": {
+          "input": 0.00,
+          "output": 0.00,
+          "cache_read": 0.00,
+          "cache_write": null,
+          "note": "Free tier (rate-limited). Pro: $1.74/$3.48 input/output"
+        },
+        "qwen3.7-max": {
+          "input": 2.50,
+          "output": 7.50,
+          "cache_read": 0.50,
+          "cache_write": 3.125
+        },
+        "qwen3.7-plus": {
+          "input": 0.40,
+          "output": 1.60,
+          "cache_read": 0.04,
+          "cache_write": 0.50
+        },
+        "qwen3.6-plus": {
+          "input": 0.50,
+          "output": 3.00,
+          "cache_read": 0.05,
+          "cache_write": 0.625
+        },
+        "qwen3.5-plus": {
+          "input": 0.20,
+          "output": 1.20,
+          "cache_read": 0.02,
+          "cache_write": 0.25
+        },
+        "grok-build-0.1": {
+          "input": 1.00,
+          "output": 2.00,
+          "cache_read": 0.20,
+          "cache_write": null
+        },
+        "claude-fable-5": {
+          "input": 10.00,
+          "output": 50.00,
+          "cache_read": 1.00,
+          "cache_write": 12.50
+        },
+        "claude-opus-4.8": {
+          "input": 5.00,
+          "output": 25.00,
+          "cache_read": 0.50,
+          "cache_write": 6.25
+        },
+        "claude-sonnet-4.6": {
+          "input": 3.00,
+          "output": 15.00,
+          "cache_read": 0.30,
+          "cache_write": 3.75
+        },
+        "claude-haiku-4.5": {
+          "input": 1.00,
+          "output": 5.00,
+          "cache_read": 0.10,
+          "cache_write": 1.25
+        },
+        "gemini-3.5-flash": {
+          "input": 1.50,
+          "output": 9.00,
+          "cache_read": 0.15,
+          "cache_write": null
+        },
+        "gpt-5.4-mini": {
+          "input": 0.75,
+          "output": 4.50,
+          "cache_read": 0.075,
+          "cache_write": null
+        },
+        "gpt-5.4-nano": {
+          "input": 0.20,
+          "output": 1.25,
+          "cache_read": 0.02,
+          "cache_write": null
+        }
+      }
     }
   }
 }

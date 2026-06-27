@@ -37,9 +37,11 @@ DEFAULT_DB = os.environ.get(
 PRICING_FILE = os.path.join(REPO_ROOT, "pricing.json")
 
 
-def load_pricing():
+def load_pricing(plan="go"):
+    """Load pricing table for the given plan ('go' or 'zen')."""
     with open(PRICING_FILE) as f:
-        return json.load(f).get("models", {})
+        data = json.load(f)
+    return data.get("plans", {}).get(plan, {}).get("models", {}), data.get("plans", {}).get(plan, {}).get("name", plan.capitalize())
 
 
 def _parse_model(model_json):
@@ -79,6 +81,9 @@ class SessionData:
         self.last_session_cost = 0.0
         self.last_session_title = ""
         self.active_sessions = 0
+        self.plan = "go"
+        self.plan_label = "Go"
+        self._pricing, _ = load_pricing("go")
         self._db_path = db_path
 
     def refresh(self):
@@ -96,7 +101,6 @@ class SessionData:
         except (sqlite3.Error, FileNotFoundError):
             return
 
-        pricing = load_pricing()
         all_sessions = []
         max_updated = 0
 
@@ -122,15 +126,17 @@ class SessionData:
             })
 
         self._all_sessions = all_sessions
-        self._pricing = pricing
         self.last_updated = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        self.recompute("all")
+        self.recompute("all", self.plan)
 
-    def recompute(self, period: str = "all"):
+    def recompute(self, period: str = "all", plan: str | None = None):
         """Recompute aggregates from _all_sessions filtered by time period.
 
         Periods: 'all', 'month' (30d), 'week' (7d), 'day' (today).
         """
+        if plan:
+            self.plan = plan
+            self._pricing, self.plan_label = load_pricing(plan)
         now = datetime.now(timezone.utc)
         cutoff = {
             "all": None,
@@ -419,6 +425,7 @@ class CostMonitor(App):
         ("q", "quit", "Quit"),
         ("r", "refresh", "Refresh now"),
         ("m", "cycle_mode", "Period"),
+        ("p", "cycle_plan", "Plan"),
     ]
 
     def __init__(self, db_path=DEFAULT_DB):
@@ -502,6 +509,15 @@ class CostMonitor(App):
         self._time_mode = self._time_modes[(idx + 1) % len(self._time_modes)]
         self.data.recompute(self._time_mode)
         self._table_timer = 999  # force table rebuild
+        self._update_widgets()
+
+    def action_cycle_plan(self):
+        """Cycle pricing plan: Go / Zen (keybinding 'p')."""
+        plans = ["go", "zen"]
+        idx = plans.index(self.data.plan)
+        new_plan = plans[(idx + 1) % len(plans)]
+        self.data.recompute(self._time_mode, plan=new_plan)
+        self._table_timer = 999
         self._update_widgets()
 
     def _update_widgets(self):
@@ -601,7 +617,7 @@ class CostMonitor(App):
 
         # ── Footer ──
         status = f" Polling every 3s · {d.active_sessions} active (last 5min)"
-        status += f" \\[m]ode:{label}  \\[r]efresh  \\[q]uit"
+        status += f" \\[m]ode:{label} \\[p]lan:{d.plan_label} \\[r]efresh \\[q]uit"
         self.query_one("#footer-status", Static).update(status)
 
 

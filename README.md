@@ -50,6 +50,13 @@ export OPENCODE_DB_PATH=/custom/path/opencode.db
 | `q` | Quit |
 | `r` | Refresh now |
 | `m` | Cycle time period (All Time / Last 30d / Last 7d / Today) |
+| `p` | Cycle pricing plan (Go / Zen) |
+
+## Pricing Plans
+
+Press `p` to switch between **Go** ($10/month subscription) and **Zen** (pay-per-token) pricing. The cache economics and model rates update to match the selected plan. Defaults to Go.
+
+Key difference: Go's cache read rate for DeepSeek V4 Flash is $0.0028/M — **10x cheaper** than Zen's $0.028/M.
 
 ## Requirements
 
