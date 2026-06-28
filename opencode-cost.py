@@ -76,7 +76,7 @@ class SessionData:
         self.full_price_cost = 0.0
         self.cache_savings = 0.0
         self.models: list = []  # sorted by cost desc
-        self.daily_trend: list[float] = []  # last 30 days cost
+        self.daily_trend: list[float] = []  # cost over filtered period
         self.last_updated = ""
         self.last_session_cost = 0.0
         self.last_session_title = ""
@@ -211,11 +211,10 @@ class SessionData:
         # Per-model list (sorted)
         self.models = sorted(model_agg.values(), key=lambda m: m.cost, reverse=True)
 
-        # Daily trend (last 30 days of filtered period)
-        trend_cutoff = datetime.now(timezone.utc) - timedelta(days=30)
+        # Daily trend (same period as the filtered view)
         self.daily_trend = [
             s["cost"] for s in sessions_list
-            if s["created"] and s["created"] >= trend_cutoff
+            if s["created"]
         ]
 
         # Active sessions (last 5 min)
@@ -466,7 +465,7 @@ class CostMonitor(App):
 
         with Horizontal(id="bottom-panel"):
             with Container(id="trend-box"):
-                yield Static("Daily Cost Trend (last 30 days)", id="trend-label", classes="stat-label")
+                yield Static("Daily Cost Trend", id="trend-label", classes="stat-label")
                 yield Static("", id="trend-spark", classes="sparkline-text")
                 yield Static("", id="trend-range", classes="stat-sub")
             with Container(classes="bottom-box"):
@@ -584,8 +583,9 @@ class CostMonitor(App):
 
         # ── Trend sparkline ──
         trend = d.daily_trend
+        trend_period_label = self._time_labels.get(self._time_mode, "all").lower()
         self.query_one("#trend-spark", Static).update(
-            _sparkline(trend, 40) + f"  last 30d: {_fmt_dollar(sum(trend))}"
+            _sparkline(trend, 40) + f"  {trend_period_label}: {_fmt_dollar(sum(trend))}"
         )
         if trend:
             self.query_one("#trend-range", Static).update(
