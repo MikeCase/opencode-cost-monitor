@@ -5,8 +5,8 @@ Watches opencode.db and updates cost stats, model breakdown, cache
 economics, and daily trend in real time.
 
 Usage:
-    ./tui.py
-    ./tui.py --db /path/to/opencode.db
+    ./opencode-cost.py
+    ./opencode-cost.py --db /path/to/opencode.db
 """
 
 import os
